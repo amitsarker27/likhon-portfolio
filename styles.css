@@ -105,9 +105,9 @@ img{max-width:100%;display:block}
 
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .grid-2.narrow{
-    display:flex;
+    display:grid;
+    grid-template-columns:minmax(320px,520px);
     justify-content:center;
-    align-items:center;
     max-width:100%;
 }
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
