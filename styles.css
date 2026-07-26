@@ -183,3 +183,22 @@ footer{border-top:1px solid var(--border);background:var(--card);padding:24px 0}
   .stat-dropdown{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;margin-top:10px;min-width:0}
   .stat-dropdown::before{display:none}
 }
+.stat-dropdown{
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.25s;
+
+    position:fixed;
+
+    z-index:99999999;
+
+}
+
+.stat-dropdown.show{
+
+    opacity:1;
+    visibility:visible;
+
+}
