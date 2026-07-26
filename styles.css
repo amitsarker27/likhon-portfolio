@@ -104,7 +104,12 @@ img{max-width:100%;display:block}
 .about-foot small{display:block;color:var(--muted)}
 
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.grid-2.narrow{max-width:820px;margin:0 auto}
+.grid-2.narrow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    max-width:100%;
+}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 
 .tl-card{display:flex;flex-direction:column;overflow:hidden}
