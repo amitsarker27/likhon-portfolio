@@ -1,46 +1,185 @@
-// Year
-document.getElementById('year').textContent = new Date().getFullYear();
+// ===============================
+// Current Year
+// ===============================
+document.getElementById("year").textContent = new Date().getFullYear();
 
-// Header scroll state
-const header = document.getElementById('header');
-const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
-onScroll();
-window.addEventListener('scroll', onScroll);
 
-// Mobile menu
-const menuBtn = document.getElementById('menuBtn');
-const navLinks = document.getElementById('navLinks');
-menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+// ===============================
+// Sticky Header
+// ===============================
+const header = document.getElementById("header");
 
-// Hero role typewriter (looping)
-const roles = ["I am Electrical Engineer", "I am Maintenance Specialist", "I am Automation Enthusiast"];
-const typedEl = document.getElementById('typed');
-let rI = 0, cI = 0, deleting = false;
-function tick() {
-  const word = roles[rI % roles.length];
-  typedEl.textContent = word.slice(0, cI);
-  if (!deleting && cI === word.length) { setTimeout(() => { deleting = true; tick(); }, 1400); return; }
-  if (deleting && cI === 0) { deleting = false; rI++; setTimeout(tick, 300); return; }
-  cI += deleting ? -1 : 1;
-  setTimeout(tick, deleting ? 45 : 90);
+window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 20);
+});
+
+
+// ===============================
+// Mobile Menu
+// ===============================
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+    });
+});
+
+
+// ===============================
+// Hero Typewriter
+// ===============================
+const roles = [
+    "I am Electrical Engineer",
+    "I am Maintenance Specialist",
+    "I am Automation Enthusiast"
+];
+
+const typed = document.getElementById("typed");
+
+let roleIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function typeRole(){
+
+    const current = roles[roleIndex];
+
+    typed.textContent = current.substring(0,charIndex);
+
+    if(!deleting){
+
+        charIndex++;
+
+        if(charIndex > current.length){
+
+            deleting = true;
+
+            setTimeout(typeRole,1500);
+
+            return;
+        }
+
+    }else{
+
+        charIndex--;
+
+        if(charIndex === 0){
+
+            deleting = false;
+
+            roleIndex++;
+
+            if(roleIndex >= roles.length){
+                roleIndex = 0;
+            }
+        }
+    }
+
+    setTimeout(typeRole,deleting ? 40 : 90);
 }
-tick();
 
-// Section headings — type on scroll into view (once each)
-const headings = document.querySelectorAll('.typed-heading');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (!e.isIntersecting || e.target.dataset.done) return;
-    e.target.dataset.done = '1';
-    const el = e.target;
-    const full = el.dataset.text || '';
-    let i = 0;
-    const step = () => {
-      el.textContent = full.slice(0, i);
-      if (i < full.length) { i++; setTimeout(step, 55); }
-    };
-    step();
-  });
-}, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
-headings.forEach(h => io.observe(h));
+typeRole();
+
+
+// ===============================
+// Section Heading Typewriter
+// ===============================
+const headings = document.querySelectorAll(".typed-heading");
+
+const observer = new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+        if(!entry.isIntersecting) return;
+
+        if(entry.target.dataset.done) return;
+
+        entry.target.dataset.done = true;
+
+        const text = entry.target.dataset.text;
+
+        let i = 0;
+
+        function write(){
+
+            entry.target.textContent = text.substring(0,i);
+
+            i++;
+
+            if(i<=text.length){
+
+                setTimeout(write,55);
+
+            }
+
+        }
+
+        write();
+
+    });
+
+},{
+    threshold:0.25
+});
+
+headings.forEach(item=>observer.observe(item));
+
+
+// ===============================
+// Stats Dropdown (Desktop + Mobile)
+// ===============================
+document.querySelectorAll(".stat-item").forEach(item=>{
+
+    const dropdown = item.querySelector(".stat-dropdown");
+
+    // Desktop Hover
+    item.addEventListener("mouseenter",()=>{
+        dropdown.classList.add("show");
+    });
+
+    item.addEventListener("mouseleave",()=>{
+        dropdown.classList.remove("show");
+    });
+
+    // Mobile Click
+    item.addEventListener("click",(e)=>{
+
+        if(window.innerWidth <= 860){
+
+            e.stopPropagation();
+
+            document.querySelectorAll(".stat-dropdown").forEach(menu=>{
+
+                if(menu!==dropdown){
+                    menu.classList.remove("show");
+                }
+
+            });
+
+            dropdown.classList.toggle("show");
+
+        }
+
+    });
+
+});
+
+
+// Close Mobile Dropdown
+document.addEventListener("click",()=>{
+
+    if(window.innerWidth <= 860){
+
+        document.querySelectorAll(".stat-dropdown").forEach(menu=>{
+            menu.classList.remove("show");
+        });
+
+    }
+
+});
