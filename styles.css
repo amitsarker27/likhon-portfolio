@@ -43,7 +43,7 @@ img{max-width:100%;display:block}
 /* HERO */
 .hero{
     position:relative;
-    overflow:visible;   /* hidden এর পরিবর্তে visible */
+    overflow:hidden;   /* hidden এর পরিবর্তে visible */
     background:var(--gradient-soft);
     padding:140px 0 80px;
 }
