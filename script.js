@@ -183,3 +183,35 @@ document.addEventListener("click",()=>{
     }
 
 });
+
+// ================================
+// Stats Dropdown (Always On Top)
+// ================================
+
+const statItems = document.querySelectorAll(".stat-item");
+
+statItems.forEach(item => {
+
+    const dropdown = item.querySelector(".stat-dropdown");
+
+    item.addEventListener("mouseenter", () => {
+
+        const rect = item.getBoundingClientRect();
+
+        dropdown.style.position = "fixed";
+        dropdown.style.left = (rect.left + rect.width / 2) + "px";
+        dropdown.style.top = (rect.bottom + 12) + "px";
+        dropdown.style.transform = "translateX(-50%)";
+        dropdown.style.zIndex = "99999999";
+
+        dropdown.classList.add("show");
+
+    });
+
+    item.addEventListener("mouseleave", () => {
+
+        dropdown.classList.remove("show");
+
+    });
+
+});
