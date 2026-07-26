@@ -228,15 +228,13 @@ footer{border-top:1px solid var(--border);background:var(--card);padding:24px 0}
         z-index:9999;
     }
 
-    .stat-item:hover .stat-dropdown,
-    .stat-item:focus-within .stat-dropdown{
-
-        opacity:1;
-        visibility:visible;
-        pointer-events:auto;
-
-    }
-
+  .stat-item:hover .stat-dropdown,
+.stat-dropdown:hover{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateX(-50%) translateY(0);
+}
 }
 .stat-dropdown{
     bottom:calc(100% + 12px);
