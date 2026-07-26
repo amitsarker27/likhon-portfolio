@@ -36,8 +36,6 @@ document.querySelectorAll(".nav-links a").forEach(link => {
 // ===============================
 const roles = [
     "I am Electrical Engineer",
-    "I am Maintenance Specialist",
-    "I am Automation Enthusiast"
 ];
 
 const typed = document.getElementById("typed");
