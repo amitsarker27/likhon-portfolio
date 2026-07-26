@@ -192,8 +192,43 @@ footer{border-top:1px solid var(--border);background:var(--card);padding:24px 0}
 }
 
 @media (max-width:860px){
-  .stat-dropdown{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;margin-top:10px;min-width:0}
-  .stat-dropdown::before{display:none}
+
+    .stats{
+        grid-template-columns:1fr;
+        max-width:100%;
+        gap:15px;
+    }
+
+    .stat-item{
+        width:100%;
+    }
+
+    .stat-dropdown{
+
+        position:absolute;
+        top:calc(100% + 10px);
+        left:50%;
+        transform:translateX(-50%);
+
+        min-width:260px;
+        max-width:90vw;
+
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+
+        z-index:9999;
+    }
+
+    .stat-item:hover .stat-dropdown,
+    .stat-item:focus-within .stat-dropdown{
+
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+
+    }
+
 }
 .stat-dropdown{
     bottom:calc(100% + 12px);
