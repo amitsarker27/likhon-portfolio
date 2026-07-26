@@ -105,10 +105,8 @@ img{max-width:100%;display:block}
 
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .grid-2.narrow{
-    display:grid;
-    grid-template-columns:minmax(320px,520px);
-    justify-content:center;
-    max-width:100%;
+    max-width:820px;
+    margin:0 auto;
 }
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 
